@@ -8,10 +8,6 @@ const app = express();
 
 const users = [];
 
-const doesExist = (username) => {
-  return users.find((user) => user.username === username);
-};
-
 app.use(express.json());
 
 app.use(
@@ -35,6 +31,8 @@ app.use("/customer/auth/*", function auth(req, res, next) {
         return res.status(403).json({ message: "User not authorized." });
       }
     });
+  } else {
+    return res.status(403).json({ message: "User not logged in." });
   }
 });
 
